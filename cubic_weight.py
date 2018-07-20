@@ -16,6 +16,12 @@ def get_product_weight(product):
     if size:
         volumn = size.get('width', 0) * size.get('length', 0) * size.get('height', 0) /1000000
 
+    msg = 'product name:{}, weight:{} g, parcel volumn:{} cubic meters'.format(
+        product.get('title'),
+        weight,
+        round(volumn, 4)
+    )
+    print(msg)
     weight = weight + volumn * 250
     return weight
 
@@ -43,19 +49,19 @@ def get_weight_by_page(page):
 
 #start calculation
 next_page = '/api/products/1'
-parcle = {
+parcel = {
     'counts': 0,
     'weight': 0
 }
 while next_page:
-    parcle_page = get_weight_by_page(next_page)
-    parcle['counts'] = parcle['counts'] + parcle_page['counts']
-    parcle['weight'] = parcle['weight'] + parcle_page['weight']
-    next_page = parcle_page['next']
+    parcel_page = get_weight_by_page(next_page)
+    parcel['counts'] = parcel['counts'] + parcel_page['counts']
+    parcel['weight'] = parcel['weight'] + parcel_page['weight']
+    next_page = parcel_page['next']
 
 average_weight = 0
-if parcle['counts'] > 0:
-    average_weight = parcle['weight']/parcle['counts']
+if parcel['counts'] > 0:
+    average_weight = parcel['weight']/parcel['counts']
 
-print ('Parcel average weight is {} kg'.format(round(average_weight, 2)))
+print ('\r\nParcel average weight is {} kg'.format(round(average_weight, 2)))
 
