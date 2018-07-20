@@ -5,7 +5,7 @@ There are Python version and JS version
 python cubic_weight.py
 ```
 
-2 To run JS version, this project folder, just run the listed command
+2. To run JS version, this project folder, just run the listed command
 ```sh
 cd react
 npm install
